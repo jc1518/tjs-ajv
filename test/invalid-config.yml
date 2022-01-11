@@ -1,0 +1,24 @@
+app_name: demo app # Wrong naming format
+account_id: 123456789000 # Wrong type
+ecs_config:
+  image_uri: 123456789000.dkr.ecr.ap-southeast-2.amazonaws.com/myapp
+  cpu_units: "256" # Wrong type
+  memory_limit: 512
+  max_task: 2
+  min_task: 0 # Less than minimum value
+  on_demand_weight: 1
+  spot_weight: 1
+  vpc_config:
+    vpc_id: vpc-0caa5a4718a3754af
+    interconnect_subnet_ids: [
+        subnet1-0f9f0c76c5a2a7d1d, # Typo
+        subnet-0cd8e42a348ce825a,
+        subnet-0191ad6db76a0b00f,
+      ]
+    application_subnet_ids:
+      [
+        subnet-09be8417840da9262,
+        subnet-0ecd63ec3e31e1bf5,
+        subnet-048032d951790d381,
+      ]
+    db_subnet_id: subnet-123456 # Not included in schema

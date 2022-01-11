@@ -1,0 +1,150 @@
+{
+  "description": "Application config",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "app_name": {
+      "description": "Application name which will be used as the CloudFormation stack name. e.g demo-application",
+      "pattern": "^[A-Za-z][A-Za-z0-9-]*$",
+      "type": "string"
+    },
+    "account_id": {
+      "description": "AWS account which the application will be deployed to. e.g 123456789000",
+      "pattern": "^\\d{12}$",
+      "type": "string"
+    },
+    "account_region": {
+      "description": "AWS region which the application will be deployed to. e.g ap-southeast-2",
+      "default": "ap-southeast-2",
+      "type": "string"
+    },
+    "ecs_config": {
+      "$ref": "#/definitions/EcsConfig",
+      "description": "ECS config"
+    }
+  },
+  "required": ["account_id", "app_name", "ecs_config"],
+  "definitions": {
+    "EcsConfig": {
+      "description": "ECS config",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "image_uri": {
+          "description": "ECR repository URI for application image. e.g 123456789000.dkr.ecr.ap-southeast-2.amazonaws.com/sample",
+          "type": "string"
+        },
+        "image_tag": {
+          "description": "Image tag for application image, e.g 1.0",
+          "default": "latest",
+          "type": "string"
+        },
+        "vpc_config": {
+          "$ref": "#/definitions/VpcConfig",
+          "description": "VPC config"
+        },
+        "cpu_units": {
+          "description": "The number of cpu units used by the ECS task.\ncpu_units - Avaiable memory_limit",
+          "type": "integer"
+        },
+        "memory_limit": {
+          "description": "The amount (in MiB) of memory used by the task.\ncpu_units - Avaiable memory_limit",
+          "type": "integer"
+        },
+        "min_task": {
+          "description": "Minimum task count for ECS service auto scaling group. e.g 1",
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_task": {
+          "description": "Maximum task count for ECS service auto scaling group. e.g 3",
+          "type": "integer",
+          "minimum": 1
+        },
+        "spot_weight": {
+          "description": "Weight value designates the relative percentage of the total number of tasks launched that use fargate spot instance. e.g 2",
+          "type": "integer",
+          "minimum": 0
+        },
+        "on_demand_weight": {
+          "description": "Weight value designates the relative percentage of the total number of tasks launched that use fargate on-demand instance. e.g 1",
+          "type": "integer",
+          "minimum": 0
+        },
+        "container_port": {
+          "description": "ECS container port for exposing. e.g 80",
+          "type": "integer"
+        },
+        "service_port": {
+          "description": "ECS service port for ingressing, default is 80 if not specified.",
+          "type": "integer",
+          "default": 80
+        },
+        "cpu_scaling_utilization": {
+          "description": "CPU utilization threshold for auto scaling, default is 70 if not specified.",
+          "type": "integer",
+          "default": 70
+        },
+        "memory_scaling_utilization": {
+          "description": "Memory utilization threshold for auto scaling, default is 70 if not specified.",
+          "type": "integer",
+          "default": 70
+        },
+        "scale_in_cooldown_duration": {
+          "description": "Cooldown duration (in seconds) for auto scaling in, default is 120 if not specified.",
+          "type": "integer",
+          "default": 120
+        },
+        "scale_out_cooldown_duration": {
+          "description": "Cooldown duration (in seconds) for auto scaling out, default is 60 if not specified.",
+          "type": "integer",
+          "default": 60
+        }
+      },
+      "required": [
+        "cpu_units",
+        "image_uri",
+        "max_task",
+        "memory_limit",
+        "min_task",
+        "on_demand_weight",
+        "spot_weight",
+        "vpc_config"
+      ]
+    },
+    "VpcConfig": {
+      "description": "VPC config",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "vpc_id": {
+          "description": "VPC ID for ECS cluster. e.g vpc-0e992e4afc4d70000",
+          "pattern": "^vpc-[a-z0-9]*$",
+          "type": "string"
+        },
+        "interconnect_subnet_ids": {
+          "description": "Interconnect subnet IDs for ECS service. e.g [subnet-0c7b6e40ab7a5aaaa, subnet-0e8b515cd754ebbbb]",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[a-z0-9]*$"
+          },
+          "type": "array"
+        },
+        "application_subnet_ids": {
+          "description": "Application subnet IDs for ECS task. e.g [subnet-0d86e40ab7a5cccc, subnet-0f9b515cd754edddd]",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[a-z0-9]*$"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "application_subnet_ids",
+        "interconnect_subnet_ids",
+        "vpc_id"
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

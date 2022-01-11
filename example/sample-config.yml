@@ -1,0 +1,24 @@
+app_name: demo-app
+account_id: "123456789000"
+ecs_config:
+  image_uri: 123456789000.dkr.ecr.ap-southeast-2.amazonaws.com/myapp
+  cpu_units: 256
+  memory_limit: 512
+  max_task: 2
+  min_task: 1
+  on_demand_weight: 1
+  spot_weight: 1
+  vpc_config:
+    vpc_id: vpc-0caa5a4718a370000
+    interconnect_subnet_ids:
+      [
+        subnet-0f9f0c76c5a2aaaaa,
+        subnet-0cd8e42a348cebbbb,
+        subnet-0191ad6db76a0cccc,
+      ]
+    application_subnet_ids:
+      [
+        subnet-09be8417840dadddd,
+        subnet-0ecd63ec3e31eeeee,
+        subnet-048032d951790ffff,
+      ]
