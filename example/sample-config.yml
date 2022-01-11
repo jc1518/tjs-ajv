@@ -1,5 +1,5 @@
 app_name: demo-app
-account_id: "123456789000"
+account_id: "1234567890001"
 ecs_config:
   image_uri: 123456789000.dkr.ecr.ap-southeast-2.amazonaws.com/myapp
   cpu_units: 256

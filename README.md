@@ -10,11 +10,13 @@ TJS-AJV is a handy tool that uses [TJS](https://github.com/YousefED/typescript-j
 
 - Define your config file, from example [sample-config.yml](./example/sample-config.yml). This file will be validated against the above json schema by tjs-ajv.
 
+- Install [tjs-ajv](https://www.npmjs.com/package/tjs-ajv) `npm install tjs-ajv`.
+
 Sample code:
 
 ```javascript
 import * as path from "path";
-import { loadConfig, validateConfig } from "../tjs-ajv";
+import { loadConfig, validateConfig } from "tjs-ajv";
 
 const INTERFACE_FILE = path.join(__dirname, "./sample-interface.ts");
 const CONFIG_FILE = path.join(__dirname, "./sample-config.yml");
@@ -41,11 +43,15 @@ if (!loadResult.success) {
 }
 ```
 
-## Demo
+## Development
+
+- Clone repo: `git clone https://github.com/jc1518/tjs-ajv.git`
+
+- Install dependencies: `cd tjs-ajv; npm install`
 
 - Run sample code: `npx ts-node example/sample.ts`
 
-- Check generated json schema file `jq -r . schema.json`
+- Check generated sample json schema file `jq -r . schema.json`
 
 - Run test: `npx jest`
 
