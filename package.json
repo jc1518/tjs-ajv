@@ -1,6 +1,7 @@
 {
   "name": "tjs-ajv",
-  "version": "0.0.3",
+  "version": "0.0.4",
+  "license": "ISC",
   "main": "./tjs-ajv.js",
   "types": "./tjs-ajv.d.ts",
   "description": "use tjs to generate schema from interface, and use ajv to validate config against schema",
