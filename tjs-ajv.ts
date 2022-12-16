@@ -68,7 +68,14 @@ export function validateConfig(
 ): Result {
   const configSchema = generateSchema(interfaceFile, interfaceName);
 
-  const ajv = new Ajv({ allErrors: true, strict: false });
+  const ajv = new Ajv({
+    allErrors: true,
+    strict: false,
+    formats: {
+      email:
+        /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
+    },
+  });
 
   const validate = ajv.compile(configSchema);
 

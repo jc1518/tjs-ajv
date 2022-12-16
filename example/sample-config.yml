@@ -1,4 +1,5 @@
 app_name: demo-app
+email: hello@world.com
 account_id: "123456789000"
 ecs_config:
   image_uri: 123456789000.dkr.ecr.ap-southeast-2.amazonaws.com/myapp

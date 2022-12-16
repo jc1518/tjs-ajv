@@ -31,6 +31,9 @@ test("Test config file is invalid", () => {
     '{"instancePath":"/app_name","schemaPath":"#/properties/app_name/pattern","keyword":"pattern","params":{"pattern":"^[A-Za-z][A-Za-z0-9-]*$"},"message":"must match pattern \\"^[A-Za-z][A-Za-z0-9-]*$\\""}'
   );
   expect(valid.data).toContain(
+    '{"instancePath":"/email","schemaPath":"#/properties/email/format","keyword":"format","params":{"format":"email"},"message":"must match format \\"email\\""}'
+  );
+  expect(valid.data).toContain(
     '{"instancePath":"/account_id","schemaPath":"#/properties/account_id/type","keyword":"type","params":{"type":"string"},"message":"must be string"}'
   );
   expect(valid.data).toContain(

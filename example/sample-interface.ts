@@ -155,6 +155,12 @@ export interface Config {
   app_name: string;
 
   /**
+   * Email address
+   * @TJS-format email
+   */
+  email: string;
+
+  /**
    * AWS account which the application will be deployed to. e.g 123456789000
    * @TJS-pattern ^\d{12}$
    */
