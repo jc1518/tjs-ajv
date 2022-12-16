@@ -1,4 +1,5 @@
 app_name: demo app # Wrong naming format
+email: hello@world # Wrong email format
 account_id: 123456789000 # Wrong type
 ecs_config:
   image_uri: 123456789000.dkr.ecr.ap-southeast-2.amazonaws.com/myapp
